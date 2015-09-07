@@ -18,4 +18,4 @@ def submit(config_content, **kwargs):
 
   response, content = h.request(heywatch_url + '/api/v1/job', 'POST', body=config_content, headers=headers)
 
-  return json.loads(content)
+  return json.loads(content.decode('utf-8'))
