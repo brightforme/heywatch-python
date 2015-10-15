@@ -1,8 +1,9 @@
 import json
 import os
 import httplib2
+import config
 
-USER_AGENT = 'HeyWatch/2.0.0 (Python)'
+USER_AGENT = 'HeyWatch/2.2.0 (Python)'
 
 def submit(config_content, **kwargs):
   heywatch_url = os.getenv('HEYWATCH_URL', 'https://heywatch.com')
@@ -19,3 +20,6 @@ def submit(config_content, **kwargs):
   response, content = h.request(heywatch_url + '/api/v1/job', 'POST', body=config_content, headers=headers)
 
   return json.loads(content.decode('utf-8'))
+
+def create(**kwargs):
+  return submit(config.new(**kwargs), **kwargs)

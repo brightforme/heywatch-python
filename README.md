@@ -15,11 +15,10 @@ Example of `heywatch.conf`:
 ``` language-hw
 var s3 = s3://accesskey:secretkey@mybucket
 
-set source  = http://yoursite.com/media/video.mp4
-set webhook = http://mysite.com/webhook/heywatch
+set webhook = http://mysite.com/webhook/heywatch?videoId=$vid
 
--> mp4  = $s3/videos/video.mp4
--> webm = $s3/videos/video.webm
+-> mp4  = $s3/videos/$vid.mp4
+-> webm = $s3/videos/$vid.webm
 -> jpg_300x = $s3/previews/thumbs_#num#.jpg, number=3
 ```
 
@@ -27,18 +26,20 @@ Here is the ruby code to submit the config file:
 
 ``` language-python
 import heywatch
-from heywatch import api
+from heywatch import job
 
-conf = open('heywatch.conf').read()
-
-job = heywatch.api.submit(conf, api_key='api-key')
+job = heywatch.job.create(
+  api_key='k-api-key',
+  conf='heywatch.conf',
+  source='http://yoursite.com/media/video.mp4',
+  vars={'vid': 1234}
+)
 
 if job['status'] == 'ok':
   print job['id']
 else:
   print job['error_code']
   print job['error_message']
-end
 ```
 
 Note that you can use the environment variable `HEYWATCH_API_KEY` to set your API key.
