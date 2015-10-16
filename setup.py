@@ -7,7 +7,7 @@ def read(*paths):
         return f.read()
 setup(
   name = 'heywatch',
-  version = '2.2.0',
+  version = '2.2.1',
   py_modules = ['heywatch.job', 'heywatch.config'],
   packages=find_packages(exclude=['tests*']),
   author='Bruno Celeste',
@@ -16,6 +16,7 @@ setup(
   license='MIT License',
   url='http://www.heywatchencoding.com',
   keywords='heywatch api',
+  install_requires=[ "httplib2" ],
 	long_description="""Client Library for encoding Videos with HeyWatch
 
 HeyWatch is a Video Encoding Web Service.
