@@ -1,7 +1,7 @@
 import json
 import os
 import httplib2
-import config
+from heywatch import config
 
 USER_AGENT = 'HeyWatch/2.2.0 (Python)'
 
